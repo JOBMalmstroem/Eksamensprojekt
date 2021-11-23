@@ -35,7 +35,6 @@ app.post('/register', (req, res) => {
     } catch {
         res.redirect('/register')
     }
-    req.body.name
-
+    console.log(users)
 })
 app.listen (3456)
