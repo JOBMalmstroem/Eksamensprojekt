@@ -22,7 +22,7 @@ app.get('/register', (req, res) => {
     res.render('register.ejs')
 })
 
-app.post('/register', (req, res) => {
+app.post('/register', async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
         users.push({
