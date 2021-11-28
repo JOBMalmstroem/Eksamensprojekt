@@ -11,6 +11,7 @@ const session = require('express-session')
 const methodOverride = require('method-override')
 
 const initializePassport = require('./passport-config')
+const { name } = require('ejs')
 initializePassport(
     passport,
     email => users.find(user => user.email === email),
@@ -66,6 +67,12 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
 })
 
 app.delete('/logout', (req, res) => {
+    req.logOut()
+    res.redirect('/login')
+})
+
+app.delete('/', (req,res) => {
+    users.splice()
     req.logOut()
     res.redirect('/login')
 })
