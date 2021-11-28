@@ -19,6 +19,7 @@ initializePassport(
 )
 
 const users = []
+const products = []
 
 app.set('view-engine', 'ejs')
 app.use(express.urlencoded({ extended: false}))
@@ -77,6 +78,35 @@ app.delete('/', (req,res) => {
     users.splice(index,1)
     req.logOut()
     res.redirect('/login')
+})
+
+app.get('/profile', checkAuthenticated, (req, res) => {
+    res.render("profile.ejs")
+})
+
+app.put('/profile', checkAuthenticated, (req,res) => {
+    const index = users.indexOf(name)
+    users[index].name = req.body
+    res.redirect('/')
+})
+
+app.get('/sales', checkAuthenticated, (req, res) => {
+    res.render("sales.ejs")
+})
+
+app.post('/sales', checkAuthenticated, (req, res) => {
+        products.push({
+            pris: req.body.price,
+            kategori: req.body.category,
+            image: req.body.img
+        })
+        res.redirect('/login')
+        console.log(products)
+})
+app.get("/showproducts", checkAuthenticated, (req, res) => {
+    res.render("showproducts.ejs", { 
+        products: products
+    })
 })
 
 function checkAuthenticated(req,res, next) {

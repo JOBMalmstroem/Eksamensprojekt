@@ -1,0 +1,18 @@
+
+    <div id="table">
+        <table>
+            <thead>
+                <th>Pris</th>
+                <th>Kategori</th>
+                <th>Image</th>
+            </thead>
+            <% products.forEach(function(eachCat){ %>
+            <tr>
+                <td> <%= eachCat.pris %> </td>
+                <td> <%= eachCat.kategori %> </td>
+                <td> <%= eachCat.image %> </td>
+            </tr>
+            <% }) %>
+        </table>
+    </div>
+   
