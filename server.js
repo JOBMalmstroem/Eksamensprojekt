@@ -72,7 +72,9 @@ app.delete('/logout', (req, res) => {
 })
 
 app.delete('/', (req,res) => {
-    users.splice()
+    
+    const index = users.indexOf(name)
+    users.splice(index,1)
     req.logOut()
     res.redirect('/login')
 })
