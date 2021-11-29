@@ -73,7 +73,13 @@ app.delete('/logout', (req, res) => {
 })
 
 app.delete('/', (req,res) => {
-    users.splice(0,1)
+    var indexId = req.user.id
+    for (var i = 0; i < users.length; i++) {
+        if (users[i].id === indexId) {
+         users.splice([i], 1)
+          break;
+        }
+      }
     req.logOut()
     res.redirect('/login')
     console.log(users)
@@ -84,16 +90,18 @@ app.get('/profile', checkAuthenticated, (req, res) => {
 })
 
 app.put('/profile', checkAuthenticated, (req,res) => {
-    users[0].name = req.body.name
-    res.redirect('/')
-    console.log(users)
+    var indexId = req.user.id
+    for (var i = 0; i < users.length; i++) {
+        if (users[i].id === indexId) {
+          users[i].name = req.body.name;
+          break;
+        }
+      }
+      res.redirect('/')
+      console.log(users)
 })
 
-app.put('/profile', checkAuthenticated, (req,res) => {
-    users[0].email = req.body.email
-    res.redirect('/')
-    console.log(users)
-})
+
 
 app.get('/sales', checkAuthenticated, (req, res) => {
     res.render("sales.ejs")
