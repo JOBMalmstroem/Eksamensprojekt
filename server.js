@@ -86,7 +86,7 @@ app.get('/profile', checkAuthenticated, (req, res) => {
 
 app.put('/profile', checkAuthenticated, (req,res) => {
     const index = users.indexOf(name)
-    users[index]= req.body.name
+    users[index].name = req.body.name
     res.redirect('/')
 })
 
