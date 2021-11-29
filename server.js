@@ -89,12 +89,19 @@ app.put('/profile', checkAuthenticated, (req,res) => {
     console.log(users)
 })
 
+app.put('/profile', checkAuthenticated, (req,res) => {
+    users[0].email = req.body.email
+    res.redirect('/')
+    console.log(users)
+})
+
 app.get('/sales', checkAuthenticated, (req, res) => {
     res.render("sales.ejs")
 })
 
 app.post('/sales', checkAuthenticated, (req, res) => {
         products.push({
+            navn: req.body.navn, 
             pris: req.body.price,
             kategori: req.body.category,
             image: req.body.img
