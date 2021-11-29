@@ -73,11 +73,10 @@ app.delete('/logout', (req, res) => {
 })
 
 app.delete('/', (req,res) => {
-    
-    const index = users.indexOf(name)
-    users.splice(index,1)
+    users.splice(0,1)
     req.logOut()
     res.redirect('/login')
+    console.log(users)
 })
 
 app.get('/profile', checkAuthenticated, (req, res) => {
@@ -85,9 +84,9 @@ app.get('/profile', checkAuthenticated, (req, res) => {
 })
 
 app.put('/profile', checkAuthenticated, (req,res) => {
-    const index = users.indexOf(name)
-    users[index].name = req.body.name
+    users[0].name = req.body.name
     res.redirect('/')
+    console.log(users)
 })
 
 app.get('/sales', checkAuthenticated, (req, res) => {
