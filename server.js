@@ -102,26 +102,59 @@ app.put('/profile', checkAuthenticated, (req,res) => {
 })
 
 
-
-app.get('/sales', checkAuthenticated, (req, res) => {
-    res.render("sales.ejs")
+app.get('/sales/opret', checkAuthenticated, (req, res) => {
+    res.render("opret.ejs")
 })
 
-app.post('/sales', checkAuthenticated, (req, res) => {
+app.post('/sales/opret', checkAuthenticated, (req, res) => {
         products.push({
+            id: Date.now().toString(),
             navn: req.body.navn, 
             pris: req.body.price,
             kategori: req.body.category,
             image: req.body.img
         })
-        res.redirect('/login')
+        res.redirect('/sales')
         console.log(products)
 })
-app.get("/showproducts", checkAuthenticated, (req, res) => {
-    res.render("showproducts.ejs", { 
+app.get('/sales', checkAuthenticated, (req, res) => {
+    res.render("sales.ejs", { 
         products: products
     })
 })
+
+app.get('/sales/:id', checkAuthenticated, (req, res) => {
+    var productId = req.params.id
+    console.log(productId)
+    res.render("product.ejs", { 
+    })
+})
+
+app.put('/sales/:id', checkAuthenticated, (req,res) => {
+    var productId = req.params.id
+    console.log(productId)
+    for (var i = 0; i < products.length; i++) {
+        if (products[i].id === productId) {
+          products[i].name = req.body.navn;
+          break;
+        }
+      }
+      res.redirect('/sales')
+      console.log(products)
+})
+
+/* app.delete('/sales/:id', (req,res) => {
+    var indexId = req.user.id
+    for (var i = 0; i < users.length; i++) {
+        if (users[i].id === indexId) {
+         users.splice([i], 1)
+          break;
+        }
+      }
+    res.redirect('/sales')
+
+})*/
+
 
 function checkAuthenticated(req,res, next) {
     if (req.isAuthenticated()) {

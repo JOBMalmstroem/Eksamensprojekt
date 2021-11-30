@@ -1,17 +1,31 @@
-<h1> Start med at sælge</h1>
-<form action="/sales" method="POST">
-    <h2>Lav dit produkt</h2>
-            <label for="Navn"></label>
-            <input class="updateInfo" type="text" id="navn" name="navn" required placeholder="Navn">
-            <br>
-            <label for="price"></label>
-            <input class="updateInfo" type="text" id="price" name="price" required placeholder="Pris">
-            <br>
-            <label for="category"></label>
-            <input class="updateInfo" type="text" id="category" name="category" required placeholder="Kategori">
-            <br>
-            <label for="img">Upload billede:</label>
-            <input type="file" id="img" name="img" accept="image/*" required>
-        <form action="/sales">
-            <button type="submit1">Opret salg</button>
-        
+<h2>Varer til salg</h2>
+<br>
+<div>
+    <table>
+        <thead>
+            <th>Id</th>
+            <th>Navn</th>
+            <th>Pris</th>
+            <th>Kategori</th>
+            <th>Image</th>
+         
+        </thead>
+        <% products.forEach(function(eachCat){ %>
+        <tr>
+          <td> <a href='/sales/<%= eachCat.id %>'> <%= eachCat.id %> </td>
+            <td> <%= eachCat.navn %> </td>
+            <td> <%= eachCat.pris %> </td>
+            <td> <%= eachCat.kategori %> </td>
+            <td> <%= eachCat.image %> </td>
+        </tr>
+        <% }) %>
+    </table>
+</div>
+<br>
+
+<form action="/sales/opret?_method=GET" method="GET">
+    <button type="submit">Opret nyt salg</button>
+</form>
+<form action="/?_method=GET" method="GET">
+    <button type="submit">Gå tilbage til forsiden</button>
+</form>
