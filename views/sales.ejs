@@ -26,6 +26,9 @@
 <form action="/sales/opret?_method=GET" method="GET">
     <button type="submit">Opret nyt salg</button>
 </form>
+<% products.forEach(function(eachCat){ %>
+<a href='/kategori/<%= eachCat.kategori %>'><%= eachCat.kategori %> </a> 
+<% }) %>
 <form action="/?_method=GET" method="GET">
     <button type="submit">Gå tilbage til forsiden</button>
 </form>

@@ -1,7 +1,19 @@
 <h1> Velkommen til din specifikke produktside, her kan du opdatere navnet på dit produkt</h1>
 <form action="/sales/:id?_method=PUT" method="POST"> 
-    <label for="name"></label>
-    <input type ="text" id="name" name="name" required placeholder="Vælg dit nye produkt navn">
-   <br/>
-    <button type="submit">Opdater</button>
+    <h2>Lav dit produkt</h2>
+    <label for="Navn"></label>
+    <input class="updateInfo" type="text" id="navn" name="navn" required placeholder="Navn">
+    <br>
+    <label for="price"></label>
+    <input class="updateInfo" type="text" id="price" name="price" required placeholder="Pris">
+    <br>
+    <label for="category"></label>
+    <input class="updateInfo" type="text" id="category" name="category" required placeholder="Kategori">
+    <br>
+    <label for="img">Upload billede:</label>
+    <input type="file" id="img" name="img" accept="image/*" required>
+    <button type="submit1">Opret salg</button>
+</form>
+<form action='/sales?_method=DELETE' method="POST">
+    <button> Slet vare </button>
 </form>

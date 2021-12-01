@@ -131,29 +131,33 @@ app.get('/sales/:id', checkAuthenticated, (req, res) => {
 })
 
 app.put('/sales/:id', checkAuthenticated, (req,res) => {
-    var productId = req.params.id
-    console.log(productId)
-    for (var i = 0; i < products.length; i++) {
-        if (products[i].id === productId) {
-          products[i].name = req.body.navn;
-          break;
-        }
-      }
-      res.redirect('/sales')
-      console.log(products)
+try {
+    products.push({
+            id: Date.now().toString(),
+            navn: req.body.navn, 
+            pris: req.body.price,
+            kategori: req.body.category,
+            image: req.body.img
+        }) 
+        products.splice(0,1)
+        res.status(200).redirect('/sales')
+}
+catch {
+    res.status(400).redirect('/')
+} console.log(products)
 })
 
-/* app.delete('/sales/:id', (req,res) => {
-    var indexId = req.user.id
-    for (var i = 0; i < users.length; i++) {
-        if (users[i].id === indexId) {
-         users.splice([i], 1)
-          break;
-        }
-      }
-    res.redirect('/sales')
+app.delete('/sales', (req,res) => {
+    products.splice(0,products.length)
+    res.status(200).redirect('/sales')
+})
 
-})*/
+app.get('/kategori/:kategori', (req, res) => {
+    const kategorier = products.find(k=> k.kategori === req.params.kategori)
+    if (!kategorier)
+    return res.send("Forkert kategori")
+    res.render('kategori.ejs' , {kategorier: kategorier})
+})
 
 
 function checkAuthenticated(req,res, next) {
