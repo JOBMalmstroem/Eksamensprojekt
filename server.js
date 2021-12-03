@@ -79,11 +79,12 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
             email: req.body.email,
             password : hashedPassword
         })
-        res.redirect('/login')
+        res.status(200).redirect('/login')
     } catch {
         res.redirect('/register')
     }
     data()
+    
     console.log(users)
 })
 
@@ -195,4 +196,4 @@ function checkNotAuthenticated(req, res, next) {
     }
     next()
 }
-app.listen (3456)
+module.exports = app.listen (3456)
