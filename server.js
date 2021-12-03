@@ -17,6 +17,7 @@ initializePassport(
     email => users.find(user => user.email === email),
     id => users.find(user=> user.id === id)
 )
+const fs = require("fs")
 
 const users = []
 const products = []
@@ -32,6 +33,24 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
+
+const data = (() => {
+    let userData = JSON.stringify(users, null, 2);
+
+    fs.writeFile("./Database/users.json", userData, (err) => {
+        if (err) throw err
+        console.log("data was send")
+    })
+})
+
+const pData =  (() => {
+    let productData = JSON.stringify(products, null, 2);
+
+    fs.writeFile("./Database/products.json", productData, (err) => {
+        if (err) throw err
+        console.log("data was send")
+    })
+})
 
 app.get('/', checkAuthenticated, (req, res) => {
     res.render('index.ejs', { name: req.user.name })
@@ -58,12 +77,13 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
             id: Date.now().toString(),
             name: req.body.name,
             email: req.body.email,
-            password: hashedPassword
+            password : hashedPassword
         })
         res.redirect('/login')
     } catch {
         res.redirect('/register')
     }
+    data()
     console.log(users)
 })
 
@@ -114,6 +134,7 @@ app.post('/sales/opret', checkAuthenticated, (req, res) => {
             kategori: req.body.category,
             image: req.body.img
         })
+        pData()
         res.redirect('/sales')
         console.log(products)
 })

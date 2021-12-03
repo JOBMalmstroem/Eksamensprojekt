@@ -2,10 +2,10 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <h1> Hej <%= name %>. Velkommen til en bedre og mere brugbar version af DBA </h1>
 <form action ="/logout?_method=DELETE" method="POST">
- <button class="btn btn-danger" type="submit">Log Ud</button>
+ <button class="btn btn-primary" type="submit">Log Ud</button>
 </form> 
 <form action ="/?_method=DELETE" method="POST">
-    <button class="btn btn-primary" type="submit">Slet bruger og log ud</button>
+    <button class="btn btn-danger" type="submit">Slet bruger og log ud</button>
    </form> 
 <form action="/profile?_method=GET" method="GET">
     <button class="btn btn-primary" type="submit">Opdater profil</button>
