@@ -11,8 +11,8 @@ describe ("Tester første krav", () => {
         it("Skal registerer en user", (done) => {
             const user = {
             id: Date.now().toString(),
-            name: "Joachim",
-            email: "Joachim@Mail.com",
+            name: "Bruger",
+            email: "Bruger@Mail.com",
             password : "$2b$10$3c4FAh80Vyzw/P47L07xV.YLPwpO3xrC0ESl0Zl3mb4F9xDt9FEj."
             }
             chai
@@ -24,8 +24,8 @@ describe ("Tester første krav", () => {
                 expect(res.status).to.equal(200)
                 expect(res.body).to.be.an("object")
                 expect(res.body).to.not.be.an("array")
-                expect(user).to.have.property("name").eq("Joachim")
-                expect(user).to.have.property("email").eq("Joachim@Mail.com")
+                expect(user).to.have.property("name").eq("Bruger")
+                expect(user).to.have.property("email").eq("Bruger@Mail.com")
                 expect(user).to.have.property("password").eq("$2b$10$3c4FAh80Vyzw/P47L07xV.YLPwpO3xrC0ESl0Zl3mb4F9xDt9FEj.")
                 done()
             })  

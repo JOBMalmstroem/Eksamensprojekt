@@ -34,6 +34,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
 
+// laver funktion der omdanner min users data til JSON
 const data = (() => {
     let userData = JSON.stringify(users, null, 2);
 
@@ -43,6 +44,7 @@ const data = (() => {
     })
 })
 
+// laver funktion der omdanner min products data til JSON
 const pData =  (() => {
     let productData = JSON.stringify(products, null, 2);
 
@@ -53,10 +55,10 @@ const pData =  (() => {
 })
 
 app.get('/', checkAuthenticated, (req, res) => {
-    res.render('index.ejs', { name: req.user.name })
+    res.render('index.ejs', { name: req.user.name }) // 
 })
 
-app.get('/login', checkNotAuthenticated, (req, res) => {
+app.get('/login', checkNotAuthenticated, (req, res) => { // 
     res.render('login.ejs')
 })
 
@@ -85,7 +87,6 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
     }
     data()
     
-    console.log(users)
 })
 
 app.delete('/logout', (req, res) => {
@@ -103,7 +104,6 @@ app.delete('/', (req,res) => {
       }
     req.logOut()
     res.redirect('/login')
-    console.log(users)
 })
 
 app.get('/profile', checkAuthenticated, (req, res) => {
@@ -119,7 +119,6 @@ app.put('/profile', checkAuthenticated, (req,res) => {
         }
       }
       res.redirect('/')
-      console.log(users)
 })
 
 
@@ -137,7 +136,6 @@ app.post('/sales/opret', checkAuthenticated, (req, res) => {
         })
         pData()
         res.redirect('/sales')
-        console.log(products)
 })
 app.get('/sales', checkAuthenticated, (req, res) => {
     res.render("sales.ejs", { 
@@ -166,7 +164,8 @@ try {
 }
 catch {
     res.status(400).redirect('/')
-} console.log(products)
+} 
+
 })
 
 app.delete('/sales', (req,res) => {
@@ -196,4 +195,4 @@ function checkNotAuthenticated(req, res, next) {
     }
     next()
 }
-module.exports = app.listen (3456)
+module.exports = app.listen (3456) 
